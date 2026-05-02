@@ -1,7 +1,7 @@
-# CPU Scheduling Simulator
+# Smart Hospital Task Scheduling Simulator
 
 <p align="center">
-  A Java Swing desktop application for simulating and comparing classic CPU scheduling algorithms.
+  A Java Swing desktop application demonstrating how CPU scheduling algorithms can optimize resource allocation in a hospital.
 </p>
 
 <p align="center">
@@ -13,48 +13,48 @@
 
 ## Overview
 
-This project is a desktop-based CPU scheduling simulator built for learning, demonstration, and lightweight experimentation with operating system scheduling strategies. It allows a user to define a set of processes, execute a selected algorithm, and immediately inspect both numeric results and a visual Gantt chart timeline.
+This project is a desktop-based hospital task scheduling simulator built for learning, demonstration, and lightweight experimentation with operating system scheduling strategies applied to healthcare. It allows a user to define a set of hospital tasks (like patient registration, emergency processing, and billing), execute a selected algorithm, and immediately inspect both numeric results and a visual Gantt chart timeline.
 
 The application is especially useful for:
 
-- understanding how different schedulers order work
+- understanding how different schedulers order hospital workflows
 - comparing waiting time and turnaround time across algorithms
-- demonstrating scheduling behavior in coursework or lab work
-- quickly testing small process sets through a GUI instead of manual calculation
+- studying how scheduling affects emergency response performance
+- quickly testing small hospital task sets through a GUI instead of manual calculation
 
 ## Highlights
 
 | Area | What the project provides |
 | --- | --- |
 | Scheduling | `FCFS`, `SJN` (non-preemptive), and `Round Robin` |
-| Interface | Java Swing GUI with editable process table |
-| Analysis | Per-process completion, turnaround, and waiting time |
-| Visualization | Gantt chart timeline showing execution order |
+| Interface | Java Swing GUI with editable hospital task table |
+| Analysis | Per-task completion, turnaround, and waiting time |
+| Visualization | Gantt chart timeline showing task execution order |
 | Build Setup | Maven project with a configured GUI entry point |
 
 ## Supported Algorithms
 
 | Algorithm | Type | Notes |
 | --- | --- | --- |
-| `FCFS` | Non-preemptive | Executes processes in arrival order |
-| `SJN` | Non-preemptive | Selects the shortest available burst among arrived processes |
-| `Round Robin` | Preemptive | Uses a configurable time quantum |
+| `FCFS` | Non-preemptive | Processes tasks exactly in their arrival order |
+| `SJN` | Non-preemptive | Selects the shortest available task among arrived tasks |
+| `Round Robin` | Preemptive | Shares resources fairly using a configurable time quantum |
 
 ## What the Application Does
 
-After entering process information, the simulator computes and displays:
+After entering hospital task information, the simulator computes and displays:
 
 - `Completion Time`
 - `Turnaround Time`
 - `Waiting Time`
 - `Average Turnaround Time`
 - `Average Waiting Time`
-- execution order in a Gantt chart
+- task execution order in a Gantt chart
 
 ## Interface Workflow
 
 ```text
-Input Process Table
+Input Hospital Task Table
    -> Select Scheduling Algorithm
    -> Set Time Quantum (Round Robin only)
    -> Run Simulation
@@ -66,7 +66,7 @@ Input Process Table
 
 The GUI is organized into three clear sections:
 
-- a top control bar for algorithm selection, process actions, and simulation run
+- a top control bar for algorithm selection, task actions, and simulation run
 - a center area with input and output tables
 - a bottom Gantt chart panel for timeline visualization
 
@@ -84,17 +84,17 @@ The simulator also ships with a small default dataset so the interface can be ex
 ## Project Structure
 
 ```text
-project_323.1/
+hospital_scheduler/
 ├── pom.xml
 ├── README.md
 ├── src/
 │   └── main/
 │       └── java/
 │           └── org/
-│               └── cpuscheduling/
+│               └── hospitalscheduling/
 │                   ├── MainGUI.java
 │                   ├── Scheduler.java
-│                   ├── Process.java
+│                   ├── HospitalTask.java
 │                   ├── FCFS.java
 │                   ├── SJN.java
 │                   └── RR.java
@@ -106,8 +106,8 @@ project_323.1/
 | File | Responsibility |
 | --- | --- |
 | `MainGUI.java` | Builds the Swing interface, collects input, runs simulations, and paints the Gantt chart |
-| `Scheduler.java` | Abstract scheduler base class with process storage, averages, and Gantt record support |
-| `Process.java` | Data model for process attributes and execution metrics |
+| `Scheduler.java` | Abstract scheduler base class with task storage, averages, and Gantt record support |
+| `HospitalTask.java` | Data model for hospital task attributes and execution metrics |
 | `FCFS.java` | First-Come, First-Served scheduling implementation |
 | `SJN.java` | Shortest Job Next scheduling implementation |
 | `RR.java` | Round Robin scheduling implementation with time quantum |
@@ -123,7 +123,7 @@ project_323.1/
 
 ```bash
 git clone <repository-url>
-cd project_323.1
+cd hospital_scheduler
 ```
 
 ### Run the simulator
@@ -132,7 +132,7 @@ cd project_323.1
 mvn compile exec:java
 ```
 
-The configured startup class is `org.cpuscheduling.MainGUI`.
+The configured startup class is `org.hospitalscheduling.MainGUI`.
 
 ### Build the project
 
@@ -146,40 +146,40 @@ Build output is generated in `target/`.
 
 1. Launch the application.
 2. Choose `FCFS`, `SJN`, or `Round Robin`.
-3. Enter or edit the process list in the input table.
+3. Enter or edit the task list in the input table.
 4. If using Round Robin, provide a time quantum.
 5. Click `Run Simulation`.
 6. Review the result table and the Gantt chart.
 
 ## Input Model
 
-Each process row contains the following fields:
+Each task row contains the following fields:
 
 | Field | Description |
 | --- | --- |
-| `Process ID` | Name shown in the result table and chart |
-| `Arrival Time` | Time at which the process becomes ready |
-| `Burst Time` | CPU time required by the process |
+| `Task Name` | Name shown in the result table and chart |
+| `Arrival Time` | Time at which the task becomes ready |
+| `Task Duration` | Time required to complete the task |
 | `Priority` | Captured by the UI, but not currently used by implemented schedulers |
 
 ## Default Sample Data
 
-The application starts with these sample processes:
+The application starts with these realistic sample tasks:
 
-| Process | Arrival Time | Burst Time | Priority |
+| Task Name | Arrival Time | Task Duration | Priority |
 | --- | ---: | ---: | ---: |
-| `P1` | 0 | 5 | 1 |
-| `P2` | 1 | 3 | 2 |
-| `P3` | 2 | 8 | 1 |
-| `P4` | 3 | 6 | 3 |
+| `Emergency Patient` | 0 | 3 | 1 |
+| `Billing` | 1 | 5 | 2 |
+| `Lab Report` | 2 | 4 | 2 |
+| `Appointment Booking` | 3 | 2 | 3 |
 
 ## Metrics Produced
 
 | Metric | Meaning |
 | --- | --- |
-| `Completion Time` | Time when a process fully finishes |
+| `Completion Time` | Time when a task fully finishes |
 | `Turnaround Time` | `Completion Time - Arrival Time` |
-| `Waiting Time` | Time spent waiting for CPU execution |
+| `Waiting Time` | Time spent waiting for execution |
 
 An `AVERAGE` row is appended after each run to summarize overall turnaround and waiting performance.
 
@@ -188,23 +188,23 @@ An `AVERAGE` row is appended after each run to summarize overall turnaround and 
 > This README reflects the current implementation in the codebase, not planned behavior.
 
 - priority-based scheduling is not implemented yet
-- input validation is basic and expects integer values
+- input validation is basic and expects numeric values
 - there is no import, export, or save/load support
 - the Gantt chart shows execution slices but does not explicitly render idle periods
 - automated tests are not included yet
 
 ## Improvement Opportunities
 
-- add Priority Scheduling and Shortest Remaining Time First
-- validate negative values and malformed inputs more clearly
-- support file-based import/export for process sets
-- improve the Gantt chart with idle slots, colors, and legends
+- add Priority Scheduling
+- add emergency real-time scheduling
+- store hospital data in a database
+- improve the Gantt chart with colored tasks
+- add report export system
 - add unit tests for each scheduler implementation
-- package the app as a runnable desktop artifact
 
 ## Academic Value
 
-This project is a solid foundation for:
+This project shows how CPU scheduling concepts can be applied to real-world hospital management systems. It is a solid foundation for:
 
 - operating systems coursework
 - scheduling algorithm demonstrations
