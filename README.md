@@ -1,51 +1,116 @@
 # CPU Scheduling Simulator
 
-A desktop-based CPU scheduling simulator built with Java Swing and Maven. The application lets users enter processes, run common scheduling algorithms, and inspect execution results through a results table and Gantt chart visualization.
+<p align="center">
+  A Java Swing desktop application for simulating and comparing classic CPU scheduling algorithms.
+</p>
+
+<p align="center">
+  <img alt="Java" src="https://img.shields.io/badge/Java-11+-0B5FFF">
+  <img alt="Build Tool" src="https://img.shields.io/badge/Build-Maven-7A3E00">
+  <img alt="UI" src="https://img.shields.io/badge/UI-Swing-0F766E">
+  <img alt="Status" src="https://img.shields.io/badge/Project-Academic%20Simulator-374151">
+</p>
 
 ## Overview
 
-This project is designed as a small operating systems simulation tool for comparing how different CPU scheduling strategies behave on the same workload. Users can define a set of processes with arrival time, burst time, and priority, then execute a scheduling policy and review:
+This project is a desktop-based CPU scheduling simulator built for learning, demonstration, and lightweight experimentation with operating system scheduling strategies. It allows a user to define a set of processes, execute a selected algorithm, and immediately inspect both numeric results and a visual Gantt chart timeline.
 
-- Completion time
-- Turnaround time
-- Waiting time
-- Average turnaround time
-- Average waiting time
-- Gantt chart execution order
+The application is especially useful for:
+
+- understanding how different schedulers order work
+- comparing waiting time and turnaround time across algorithms
+- demonstrating scheduling behavior in coursework or lab work
+- quickly testing small process sets through a GUI instead of manual calculation
+
+## Highlights
+
+| Area | What the project provides |
+| --- | --- |
+| Scheduling | `FCFS`, `SJN` (non-preemptive), and `Round Robin` |
+| Interface | Java Swing GUI with editable process table |
+| Analysis | Per-process completion, turnaround, and waiting time |
+| Visualization | Gantt chart timeline showing execution order |
+| Build Setup | Maven project with a configured GUI entry point |
 
 ## Supported Algorithms
 
-- `FCFS` (First-Come, First-Served)
-- `SJN` (Shortest Job Next, non-preemptive)
-- `Round Robin` with configurable time quantum
+| Algorithm | Type | Notes |
+| --- | --- | --- |
+| `FCFS` | Non-preemptive | Executes processes in arrival order |
+| `SJN` | Non-preemptive | Selects the shortest available burst among arrived processes |
+| `Round Robin` | Preemptive | Uses a configurable time quantum |
 
-## Features
+## What the Application Does
 
-- Simple desktop GUI built with Java Swing
-- Editable input table for process definitions
-- One-click simulation run from the interface
-- Output table with per-process scheduling metrics
-- Automatic average waiting and turnaround calculations
-- Gantt chart timeline for execution visualization
-- Maven-based build and run setup
+After entering process information, the simulator computes and displays:
+
+- `Completion Time`
+- `Turnaround Time`
+- `Waiting Time`
+- `Average Turnaround Time`
+- `Average Waiting Time`
+- execution order in a Gantt chart
+
+## Interface Workflow
+
+```text
+Input Process Table
+   -> Select Scheduling Algorithm
+   -> Set Time Quantum (Round Robin only)
+   -> Run Simulation
+   -> Review Result Table
+   -> Inspect Gantt Chart Timeline
+```
+
+## Screens and Behavior
+
+The GUI is organized into three clear sections:
+
+- a top control bar for algorithm selection, process actions, and simulation run
+- a center area with input and output tables
+- a bottom Gantt chart panel for timeline visualization
+
+The simulator also ships with a small default dataset so the interface can be explored immediately after launch.
 
 ## Technology Stack
 
-- Java 11
-- Swing
-- Maven
+| Layer | Choice |
+| --- | --- |
+| Language | Java 11 |
+| UI Toolkit | Swing |
+| Build Tool | Maven |
+| Packaging Style | Standard Maven Java project |
 
 ## Project Structure
 
 ```text
-src/main/java/org/cpuscheduling/
-├── MainGUI.java      # Swing interface and simulation flow
-├── Scheduler.java    # Abstract base scheduler and shared metrics helpers
-├── Process.java      # Process model and execution state
-├── FCFS.java         # First-Come, First-Served implementation
-├── SJN.java          # Shortest Job Next implementation
-└── RR.java           # Round Robin implementation
+project_323.1/
+├── pom.xml
+├── README.md
+├── src/
+│   └── main/
+│       └── java/
+│           └── org/
+│               └── cpuscheduling/
+│                   ├── MainGUI.java
+│                   ├── Scheduler.java
+│                   ├── Process.java
+│                   ├── FCFS.java
+│                   ├── SJN.java
+│                   └── RR.java
+└── target/
 ```
+
+## Core Components
+
+| File | Responsibility |
+| --- | --- |
+| `MainGUI.java` | Builds the Swing interface, collects input, runs simulations, and paints the Gantt chart |
+| `Scheduler.java` | Abstract scheduler base class with process storage, averages, and Gantt record support |
+| `Process.java` | Data model for process attributes and execution metrics |
+| `FCFS.java` | First-Come, First-Served scheduling implementation |
+| `SJN.java` | Shortest Job Next scheduling implementation |
+| `RR.java` | Round Robin scheduling implementation with time quantum |
 
 ## Prerequisites
 
@@ -54,83 +119,98 @@ src/main/java/org/cpuscheduling/
 
 ## Getting Started
 
-### 1. Clone the repository
+### Clone the repository
 
 ```bash
 git clone <repository-url>
 cd project_323.1
 ```
 
-### 2. Run the application
+### Run the simulator
 
 ```bash
 mvn compile exec:java
 ```
 
-The Maven configuration launches `org.cpuscheduling.MainGUI`.
+The configured startup class is `org.cpuscheduling.MainGUI`.
 
-### 3. Build the project
+### Build the project
 
 ```bash
 mvn clean package
 ```
 
-Compiled classes and build artifacts are generated in `target/`.
+Build output is generated in `target/`.
 
 ## How to Use
 
 1. Launch the application.
-2. Choose a scheduling algorithm from the dropdown.
-3. For Round Robin, enter a time quantum.
-4. Add, remove, or edit process rows in the input table.
+2. Choose `FCFS`, `SJN`, or `Round Robin`.
+3. Enter or edit the process list in the input table.
+4. If using Round Robin, provide a time quantum.
 5. Click `Run Simulation`.
-6. Review the computed metrics in the results table and the execution timeline in the Gantt chart.
+6. Review the result table and the Gantt chart.
 
-## Input Fields
+## Input Model
 
-Each process row contains:
+Each process row contains the following fields:
 
-- `Process ID`: Label used in results and the Gantt chart
-- `Arrival Time`: Time at which the process enters the ready queue
-- `Burst Time`: Required CPU execution time
-- `Priority`: Currently collected by the UI, but not used by the implemented algorithms
+| Field | Description |
+| --- | --- |
+| `Process ID` | Name shown in the result table and chart |
+| `Arrival Time` | Time at which the process becomes ready |
+| `Burst Time` | CPU time required by the process |
+| `Priority` | Captured by the UI, but not currently used by implemented schedulers |
 
-## Example Default Dataset
+## Default Sample Data
 
-The application starts with four sample processes:
+The application starts with these sample processes:
 
 | Process | Arrival Time | Burst Time | Priority |
 | --- | ---: | ---: | ---: |
-| P1 | 0 | 5 | 1 |
-| P2 | 1 | 3 | 2 |
-| P3 | 2 | 8 | 1 |
-| P4 | 3 | 6 | 3 |
+| `P1` | 0 | 5 | 1 |
+| `P2` | 1 | 3 | 2 |
+| `P3` | 2 | 8 | 1 |
+| `P4` | 3 | 6 | 3 |
 
-## Output Metrics
+## Metrics Produced
 
-After each simulation, the application reports:
+| Metric | Meaning |
+| --- | --- |
+| `Completion Time` | Time when a process fully finishes |
+| `Turnaround Time` | `Completion Time - Arrival Time` |
+| `Waiting Time` | Time spent waiting for CPU execution |
 
-- `Completion Time`: When the process finishes
-- `Turnaround Time`: `Completion Time - Arrival Time`
-- `Waiting Time`: Time spent waiting before CPU service
+An `AVERAGE` row is appended after each run to summarize overall turnaround and waiting performance.
 
-An `AVERAGE` row is also appended to summarize overall turnaround and waiting time.
+## Current Scope and Limitations
 
-## Current Limitations
+> This README reflects the current implementation in the codebase, not planned behavior.
 
-- No priority scheduling algorithm is implemented yet
-- No export or persistence for saved simulations
-- Input validation is basic and expects integer values
-- The Gantt chart focuses on execution slices and does not visualize idle time explicitly
+- priority-based scheduling is not implemented yet
+- input validation is basic and expects integer values
+- there is no import, export, or save/load support
+- the Gantt chart shows execution slices but does not explicitly render idle periods
+- automated tests are not included yet
 
-## Future Improvement Ideas
+## Improvement Opportunities
 
-- Add Priority Scheduling and SRTF
-- Support importing/exporting process datasets
-- Add validation feedback for negative or invalid values
-- Improve Gantt chart labeling and idle-period rendering
-- Add automated unit tests for scheduler implementations
+- add Priority Scheduling and Shortest Remaining Time First
+- validate negative values and malformed inputs more clearly
+- support file-based import/export for process sets
+- improve the Gantt chart with idle slots, colors, and legends
+- add unit tests for each scheduler implementation
+- package the app as a runnable desktop artifact
+
+## Academic Value
+
+This project is a solid foundation for:
+
+- operating systems coursework
+- scheduling algorithm demonstrations
+- classroom presentations
+- beginner-to-intermediate Java GUI practice
 
 ## License
 
-No license file is currently included in this repository. Add one if you plan to distribute or reuse the project publicly.
+No license file is currently included in the repository. If the project is intended for public sharing, adding a license would make reuse terms clear.
