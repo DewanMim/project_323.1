@@ -211,6 +211,6 @@ This project is a solid foundation for:
 - classroom presentations
 - beginner-to-intermediate Java GUI practice
 
-## License
+## Author
 
-No license file is currently included in the repository. If the project is intended for public sharing, adding a license would make reuse terms clear.
+DewanMim
