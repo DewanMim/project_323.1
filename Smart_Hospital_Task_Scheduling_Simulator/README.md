@@ -118,9 +118,4 @@ The project follows a **"Hospital-Tech"** aesthetic:
 
 ---
 
-## 📜 License
 
-Distributed under the MIT License. See `LICENSE` for more information.
-
----
-*Developed with focus on Healthcare Efficiency and Patient Care.*

@@ -44,15 +44,15 @@ public class MainGUI extends JFrame {
         quantumField.setEnabled(false);
 
         JButton addTaskBtn = new JButton("Add Process");
+        styleButton(addTaskBtn, new Color(16, 185, 129));
         addTaskBtn.addActionListener(e -> addTaskRow());
 
         JButton removeTaskBtn = new JButton("Remove Process");
+        styleButton(removeTaskBtn, new Color(239, 68, 68));
         removeTaskBtn.addActionListener(e -> removeTaskRow());
 
         JButton runSimulationBtn = new JButton("Run Simulation");
-        runSimulationBtn.setBackground(new Color(14, 165, 233));
-        runSimulationBtn.setForeground(Color.WHITE);
-        runSimulationBtn.setFont(new Font("SansSerif", Font.BOLD, 12));
+        styleButton(runSimulationBtn, new Color(14, 165, 233));
         runSimulationBtn.addActionListener(e -> runSimulation());
 
         topPanel.add(new JLabel("Algorithm:"));
@@ -244,7 +244,7 @@ public class MainGUI extends JFrame {
 
             GradientPaint gp = new GradientPaint(x, y, baseColor, x, y + rectHeight, baseColor.darker());
             g2d.setPaint(gp);
-            g2d.fillRoundRect(x, y, currentWidth - 2, rectHeight, 12, 12);
+            g2d.fillRoundRect(x, y, Math.max(2, currentWidth - 2), rectHeight, 12, 12);
 
             g2d.setColor(Color.WHITE);
             g2d.setFont(new Font("SansSerif", Font.BOLD, 12));
@@ -278,5 +278,12 @@ public class MainGUI extends JFrame {
         SwingUtilities.invokeLater(() -> {
             new MainGUI().setVisible(true);
         });
+    }
+    private void styleButton(JButton btn, Color bg) {
+        btn.setBackground(bg);
+        btn.setForeground(Color.WHITE);
+        btn.setFont(new Font("SansSerif", Font.BOLD, 12));
+        btn.setFocusPainted(false);
+        btn.setBorder(BorderFactory.createEmptyBorder(5, 15, 5, 15));
     }
 }
