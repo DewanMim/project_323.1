@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Hospital Simulator (Desktop)",
+            "request": "launch",
+            "mainClass": "org.hospitalscheduling.MainGUI",
+            "projectName": "hospital-task-scheduler"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Hospital Dashboard (Web)",
+            "url": "http://localhost:5174",
+            "webRoot": "${workspaceFolder}/modern-dashboard"
+        }
+    ]
+}

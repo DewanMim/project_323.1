@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Web Dashboard",
+            "type": "shell",
+            "command": "npm run dev",
+            "options": {
+                "cwd": "${workspaceFolder}/modern-dashboard"
+            },
+            "isBackground": true,
+            "problemMatcher": ["$vite"]
+        },
+        {
+            "label": "Run Desktop App (Maven)",
+            "type": "shell",
+            "command": "mvn exec:java -Dexec.mainClass=\"org.hospitalscheduling.MainGUI\"",
+            "group": "test",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Build All",
+            "type": "shell",
+            "command": "mvn clean compile && cd modern-dashboard && npm install",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
