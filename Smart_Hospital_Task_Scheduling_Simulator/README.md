@@ -1,121 +1,189 @@
 # 🏥 Smart Hospital Task Scheduling Simulator
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Java](https://img.shields.io/badge/Java-11%2B-blue.svg)](https://www.oracle.com/java/)
-[![React](https://img.shields.io/badge/React-18-61DAFB.svg)](https://reactjs.org/)
-[![Vite](https://img.shields.io/badge/Vite-Latest-646CFF.svg)](https://vitejs.dev/)
+<p align="center">
+  A dual-platform (Java Swing + React Web) scheduling simulator designed to optimize resource allocation in modern healthcare environments.
+</p>
 
-A sophisticated scheduling simulator designed to optimize resource allocation in modern healthcare environments. This project bridges the gap between algorithmic theory and practical hospital task management.
-
-> [!TIP]
-> **New Feature:** Experience our premium **Modern Web Dashboard** with real-time glassmorphic visualizations!
-
----
-
-## 📖 Table of Contents
-- [✨ Key Features](#-key-features)
-- [🛠 Tech Stack](#-tech-stack)
-- [🚀 Quick Start](#-quick-start)
-- [🧩 Algorithms Explained](#-algorithms-explained)
-- [📁 Project Structure](#-project-structure)
-- [🎨 Design Philosophy](#-design-philosophy)
-- [📜 License](#-license)
+<p align="center">
+  <img alt="Java" src="https://img.shields.io/badge/Java-11+-0B5FFF?style=for-the-badge&logo=java&logoColor=white">
+  <img alt="React" src="https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=white">
+  <img alt="Vite" src="https://img.shields.io/badge/Vite-Latest-646CFF?style=for-the-badge&logo=vite&logoColor=white">
+  <img alt="Status" src="https://img.shields.io/badge/Project-Healthcare%20Simulator-10B981?style=for-the-badge">
+</p>
 
 ---
 
-## ✨ Key Features
+## 📖 Overview
 
-- **Multi-Algorithm Support**: Compare FCFS, SJN, and Round Robin scheduling in real-time.
-- **Dynamic Gantt Charts**: High-fidelity visual timelines for task execution.
-- **Performance Metrics**: Automatic calculation of Turnaround Time (TAT) and Waiting Time (WT).
-- **Healthcare Domain Logic**: Optimized for surgery prep, radiology, and emergency triage tasks.
-- **Cross-Platform**: Run as a modern web dashboard or a robust Java desktop application.
+This project is a sophisticated task scheduling simulator that bridges the gap between operating system scheduling algorithms and practical hospital resource management. It provides both a robust Java desktop application and a premium glassmorphic web dashboard to simulate how different scheduling strategies affect hospital efficiency, patient wait times, and task completion rates.
+
+**The application is especially useful for:**
+- 🏥 Optimizing triage and task prioritization in emergency departments
+- 📊 Comparing scheduling efficiency (FCFS vs SJN vs RR) for medical procedures
+- 🏫 Demonstrating scheduling theory in healthcare informatics coursework
+- ⚡ Visualizing resource bottlenecks through interactive Gantt charts
 
 ---
 
-## 🛠 Tech Stack
+## ✨ Highlights
 
-| Layer | Technology |
+| Area | What the project provides |
 | :--- | :--- |
-| **Frontend (Web)** | React, TypeScript, Framer Motion, Lucide Icons |
-| **Backend (Core)** | Java 11+, Maven |
-| **Styling** | Vanilla CSS3 (Custom Design System), FlatLaf (Java) |
-| **Tools** | Vite, GitHub Actions |
+| **Scheduling** | `FCFS`, `SJN`, and `Round Robin` tailored for hospital tasks |
+| **Interfaces** | Modern Java Swing GUI + Premium React Web Dashboard |
+| **Analysis** | Real-time calculation of Turnaround Time (TAT) and Waiting Time (WT) |
+| **Visualization**| High-fidelity Gantt charts showing medical task execution timelines |
+| **Aesthetics** | Professional "Hospital-Tech" design system with glassmorphism |
 
 ---
 
-## 🚀 Quick Start
+## ⚙️ Supported Algorithms
 
-### 🌐 Modern Web Dashboard (Premium UI)
-The recommended way to experience the simulator with high-end animations.
+| Algorithm | Healthcare Context | Notes |
+| :--- | :--- | :--- |
+| `FCFS` | General Admin / Triage | Tasks executed in the exact order of arrival |
+| `SJN` | Fast-track Diagnostics | Prioritizes shorter tasks to minimize average wait times |
+| `Round Robin` | Shared Resources / ICU | Cycles through tasks using a fixed time quantum |
 
-```bash
-# Navigate to the dashboard directory
-cd modern-dashboard
+---
 
-# Install dependencies
-npm install
+## 🚀 Interface Workflow
 
-# Start the development server
-npm run dev
-```
-🔗 **Access:** Open [http://localhost:5173](http://localhost:5173)
+The simulator follows a streamlined medical workflow from data entry to visual analysis:
 
-### ☕ Legacy Java Desktop
-Original robust implementation for desktop environments.
-
-```bash
-# Build the project
-mvn clean compile
-
-# Run the GUI
-mvn exec:java -Dexec.mainClass="org.hospitalscheduling.MainGUI"
+```mermaid
+graph LR
+    A[Define Hospital Tasks] --> B[Select Strategy];
+    B --> C{Is Round Robin?};
+    C -->|Yes| D[Set Time Quantum];
+    C -->|No| E[Execute Simulation];
+    D --> E;
+    E --> F[Analyze Metrics];
+    E --> G[View Gantt Timeline];
 ```
 
 ---
 
-## 🧩 Algorithms Explained
+## 🛠️ Technology Stack
 
-### 1. First-Come, First-Served (FCFS)
-The simplest form of scheduling. Tasks are executed in the exact order they arrive at the triage desk.
-- **Use Case:** General administrative tasks.
-
-### 2. Shortest Job Next (SJN)
-Optimizes the queue by prioritizing tasks with the shortest duration. This significantly reduces average waiting times.
-- **Use Case:** Fast-track diagnostic tests.
-
-### 3. Round Robin (RR)
-Allocates a fixed "Time Quantum" to each task, cycling through the queue. Ensures no single task blocks the system.
-- **Use Case:** ICU monitoring and shared resource management.
+| Layer | Choice |
+| :--- | :--- |
+| **Core Logic** | Java 11 / TypeScript |
+| **Web UI** | React 18, Framer Motion, Lucide Icons |
+| **Desktop UI** | Java Swing with FlatLaf Theme |
+| **Build Tools** | Maven & Vite |
+| **Styling** | Vanilla CSS3 (Modern Design System) |
 
 ---
 
 ## 📁 Project Structure
 
-```bash
+```text
 Smart_Hospital_Simulator/
-├── modern-dashboard/       # Premium React Frontend
+├── modern-dashboard/       # Premium React Web Frontend
 │   ├── src/
 │   │   ├── scheduling.ts   # Ported Scheduling Logic
 │   │   └── App.tsx         # Dashboard UI
 │   └── index.css           # Design System
 ├── src/                    # Core Java Implementation
-│   └── main/java/org/...
-│       ├── FCFS.java       # Algorithm Implementation
-│       └── MainGUI.java    # Modernized Swing UI
-├── pom.xml                 # Maven Configuration
-└── README.md               # You are here
+│   └── main/java/org/hospitalscheduling/
+│       ├── MainGUI.java    # Modernized Swing UI
+│       ├── Scheduler.java  # Abstract base class
+│       ├── HospitalTask.java # Task data model
+│       ├── FCFS.java       # FCFS Implementation
+│       ├── SJN.java        # SJN Implementation
+│       └── RR.java         # RR Implementation
+└── pom.xml                 # Maven Configuration
 ```
 
+### Core Components
+
+| Component | Responsibility |
+| :--- | :--- |
+| `modern-dashboard/` | High-end web interface for presentation and visualization |
+| `MainGUI.java` | Main entry point for the professional desktop application |
+| `HospitalTask.java` | Model for medical tasks (Arrival, Duration, Priority) |
+| `Scheduler.java` | Logic engine for computing scheduling metrics and timelines |
+
 ---
 
-## 🎨 Design Philosophy
+## 🏃 Getting Started
 
-The project follows a **"Hospital-Tech"** aesthetic:
-- **Colors:** Deep Slate (`#0f172a`), Primary Sky (`#0ea5e9`), and Success Emerald (`#10b981`).
-- **Feel:** Professional, clean, and high-contrast for medical environments.
-- **Interactions:** Smooth, non-distracting micro-animations for better cognitive load management.
+### ☕ Running the Desktop Application
+1. **Build the project:**
+   ```bash
+   mvn clean compile
+   ```
+2. **Run the GUI:**
+   ```bash
+   mvn exec:java -Dexec.mainClass="org.hospitalscheduling.MainGUI"
+   ```
+
+### 🌐 Running the Web Dashboard
+1. **Navigate to directory:**
+   ```bash
+   cd modern-dashboard
+   ```
+2. **Install & Start:**
+   ```bash
+   npm install && npm run dev
+   ```
+3. **Access:** Open `http://localhost:5173`
 
 ---
 
+## 💡 How to Use
 
+1. **Launch** your preferred interface (Desktop or Web).
+2. **Input Tasks** such as "Surgery Prep", "Radiology", or "Patient Intake".
+3. **Select Algorithm** based on the hospital scenario you wish to simulate.
+4. **Run Simulation** to see the engine process the tasks.
+5. **Review Results** in the performance table and the visual Gantt chart.
+
+---
+
+## 📊 Sample Medical Data
+
+The simulator comes pre-loaded with realistic healthcare task sets:
+
+| Task Name | Arrival Time | Duration | Priority |
+| :--- | :---: | :---: | :---: |
+| `Surgery Prep` | 0 | 5 | 1 |
+| `Radiology` | 1 | 3 | 2 |
+| `Lab Tests` | 2 | 8 | 1 |
+| `Patient Intake`| 3 | 6 | 3 |
+
+*Note: Metrics like Completion Time, Turnaround Time, and Waiting Time are calculated automatically for every task.*
+
+---
+
+## 🎯 Scope & Improvement Opportunities
+
+> **Note:** This simulator is currently a functional demonstration of scheduling theory applied to healthcare.
+
+**Current Features:**
+- Full implementation of FCFS, SJN, and Round Robin.
+- Multi-platform support (Web and Desktop).
+- Visual timeline rendering.
+
+**Future Roadmap:**
+- [ ] **Priority Scheduling:** Implementation of priority-based triage.
+- [ ] **Real-time API:** Connect the Web UI to the Java backend via Spring Boot.
+- [ ] **Data Export:** PDF/CSV reporting for hospital management.
+- [ ] **Staff Constraints:** Adding resource limits (e.g., number of available doctors).
+
+---
+
+## 🎓 Academic Value
+
+This project serves as a bridge between computer science and health informatics, demonstrating:
+- Real-world application of scheduling algorithms.
+- Cross-platform development (Java and React).
+- Modern UI/UX principles in technical tools.
+- Performance analysis through simulation.
+
+---
+
+<p align="center">
+  <b>Developed by DewanMim</b>
+</p>
