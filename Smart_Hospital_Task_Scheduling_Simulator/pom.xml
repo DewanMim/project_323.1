@@ -15,7 +15,11 @@
     </properties>
 
     <dependencies>
-        <!-- Java Swing is part of the standard library, no external dependencies needed for standard UI -->
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.4.1</version>
+        </dependency>
     </dependencies>
 
     <build>
